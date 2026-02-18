@@ -3,37 +3,20 @@
  */
 
 document.addEventListener('DOMContentLoaded', function () {
-  const filterFeatureCheckbox = document.getElementById('filter-feature');
-  const resetBtn = document.getElementById('reset-filters');
+  const threadFeatureCheckbox = document.getElementById('thread-feature');
 
   // 設定読み込み
-  chrome.storage.sync.get({ filterFeature: true }, function (items) {
-    filterFeatureCheckbox.checked = items.filterFeature;
+  chrome.storage.sync.get({ threadFeature: true }, function (items) {
+    threadFeatureCheckbox.checked = items.threadFeature;
   });
 
-  // フィルター機能トグル
-  filterFeatureCheckbox.addEventListener('change', function () {
-    chrome.storage.sync.set({ filterFeature: this.checked });
+  // スレッド機能トグル
+  threadFeatureCheckbox.addEventListener('change', function () {
+    chrome.storage.sync.set({ threadFeature: this.checked });
     sendMessageToContentScript({
-      action: 'toggleFilterFeature',
+      action: 'toggleThreadFeature',
       enabled: this.checked,
     });
-  });
-
-  // リセットボタン
-  resetBtn.addEventListener('click', function () {
-    if (confirm('フィルター設定をデフォルトに戻しますか？')) {
-      chrome.storage.sync.remove('filterButtons', function () {
-        sendMessageToContentScript({ action: 'resetFilters' });
-        // 視覚的フィードバック
-        resetBtn.textContent = 'リセット完了！';
-        resetBtn.style.backgroundColor = '#5fb878';
-        setTimeout(() => {
-          resetBtn.textContent = 'フィルター設定をリセット';
-          resetBtn.style.backgroundColor = '#ff6b6b';
-        }, 2000);
-      });
-    }
   });
 });
 

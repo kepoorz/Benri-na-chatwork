@@ -83,22 +83,6 @@
       input:checked + .slider:before {
         transform: translateX(26px);
       }
-      .reset-btn {
-        display: block;
-        width: 100%;
-        padding: 8px;
-        margin-top: 10px;
-        background-color: #ff6b6b;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 13px;
-        transition: background-color 0.2s;
-      }
-      .reset-btn:hover {
-        background-color: #ee5a5a;
-      }
       .footer {
         margin-top: 15px;
         padding-top: 10px;
@@ -119,17 +103,15 @@
     <div class="title">Benri-na-chatwork</div>
 
     <div class="option">
-      <div class="option-title">フィルター機能</div>
+      <div class="option-title">スレッド機能</div>
       <div class="option-desc">
-        チャットルームをタイルボタンでフィルタリングします。
+        REボタンからスレッドビューを表示します。
         <label class="switch">
-          <input type="checkbox" id="filter-feature" />
+          <input type="checkbox" id="thread-feature" />
           <span class="slider"></span>
         </label>
       </div>
     </div>
-
-    <button id="reset-filters" class="reset-btn">フィルター設定をリセット</button>
 
     <div class="footer">
       Created with ❤️ for ChatWork
