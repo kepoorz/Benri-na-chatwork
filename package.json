@@ -27,7 +27,7 @@
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
     "css-minimizer-webpack-plugin": "^5.0.1",
-    "eslint": "^8.50.0",
+    "eslint": "^10.0.0",
     "eslint-config-prettier": "^9.0.0",
     "prettier": "^3.0.3",
     "rimraf": "^6.1.3",
