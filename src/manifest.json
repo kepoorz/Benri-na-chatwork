@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "Benri-na-chatwork",
+  "version": "2.0.0",
+  "description": "ChatWorkの便利な機能拡張 - フィルタータイルでチャットを整理",
+  "author": "",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["https://www.chatwork.com/*", "https://kcw.kddi.ne.jp/*"],
+  "action": {
+    "default_popup": "html/popup.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    },
+    "default_title": "Benri-na-chatwork"
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.chatwork.com/*", "https://kcw.kddi.ne.jp/*"],
+      "js": ["js/content-bundle.js"],
+      "css": ["css/styles.css"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["images/*"],
+      "matches": ["https://www.chatwork.com/*", "https://kcw.kddi.ne.jp/*"]
+    }
+  ]
+}

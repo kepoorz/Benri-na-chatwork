@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="128" height="128" rx="20" fill="#5fb878"/>
+  
+  <!-- フォルダアイコン -->
+  <path d="M30 36 H60 L70 46 H98 C101.3 46 104 48.7 104 52 V92 C104 95.3 101.3 98 98 98 H30 C26.7 98 24 38.7 24 42 V42 C24 38.7 26.7 36 30 36 Z" fill="white" opacity="0.9"/>
+  
+  <!-- リンクアイコン -->
+  <path d="M55 65 C50 60 50 52 55 47 C60 42 68 42 73 47 L85 59 C90 64 90 72 85 77 C80 82 72 82 67 77 L63 73" stroke="white" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <path d="M73 63 C78 68 78 76 73 81 C68 86 60 86 55 81 L43 69 C38 64 38 56 43 51 C48 46 56 46 61 51 L65 55" stroke="white" stroke-width="8" stroke-linecap="round" fill="none"/>
+</svg>
