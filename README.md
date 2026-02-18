@@ -1,5 +1,8 @@
 # Benri-na-chatwork
 
+![CleanShot 20260219_011334](https://github.com/user-attachments/assets/c115c2a6-6008-48a1-9a10-7afb5b14eff1)
+
+
 ## これはなに
 
 ChatWorkの右カラム（サイドバー）にスレッドビューを追加するChrome拡張機能です。
