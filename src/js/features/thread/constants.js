@@ -21,7 +21,6 @@ export const THREAD_CSS = {
   panelTitle: 'cw-thread-panel__title',
   panelClose: 'cw-thread-panel__close',
   panelBody: 'cw-thread-panel__body',
-  panelFooter: 'cw-thread-panel__footer',
   messageItem: 'cw-thread-message',
   messageHighlight: 'cw-thread-message--highlight',
   messageAvatar: 'cw-thread-message__avatar',
@@ -32,8 +31,6 @@ export const THREAD_CSS = {
   messageActions: 'cw-thread-message__actions',
   messageActionBtn: 'cw-thread-message__action-btn',
   messageActionLabel: 'cw-thread-message__action-label',
-  replyInput: 'cw-thread-reply-input',
-  replySendBtn: 'cw-thread-reply-send',
   loading: 'cw-thread-loading',
 };
 

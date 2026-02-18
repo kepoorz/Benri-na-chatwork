@@ -68,39 +68,8 @@ export function showThreadPanel(chain, anchorMid) {
     body.appendChild(item);
   });
 
-  // フッター（返信入力）
-  const footer = document.createElement('div');
-  footer.className = THREAD_CSS.panelFooter;
-
-  const input = document.createElement('textarea');
-  input.className = THREAD_CSS.replyInput;
-  input.placeholder = '返信を入力...';
-  input.rows = 2;
-
-  const sendBtn = document.createElement('button');
-  sendBtn.className = THREAD_CSS.replySendBtn;
-  sendBtn.textContent = '送信';
-  sendBtn.addEventListener('click', () => {
-    const text = input.value.trim();
-    if (!text) return;
-    sendReplyFromPanel(text);
-    input.value = '';
-  });
-
-  // Enter送信（Shift+Enterで改行）
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      sendBtn.click();
-    }
-  });
-
-  footer.appendChild(input);
-  footer.appendChild(sendBtn);
-
   panel.appendChild(header);
   panel.appendChild(body);
-  panel.appendChild(footer);
 
   subContentArea.appendChild(panel);
 
@@ -253,41 +222,6 @@ function injectReplyTag(msg) {
   chatInput.dispatchEvent(new Event('input', { bubbles: true }));
 
   log.info('返信タグを挿入', { replyTag });
-}
-
-/**
- * スレッドパネルのフッターから返信を送信
- * チャット入力欄に[返信]タグ付きテキストを挿入
- */
-function sendReplyFromPanel(text) {
-  const chatInput = findElementBySelectors(THREAD_SELECTORS.chatInput);
-  if (!chatInput) {
-    log.warn('チャット入力欄が見つかりません');
-    return;
-  }
-
-  // 最後のメッセージ（チェーンの末尾）に返信
-  const chain = threadState.chain;
-  const lastMsg = chain[chain.length - 1];
-  if (!lastMsg) return;
-
-  const aid = lastMsg.aid || '';
-  const rid = threadState.anchorRoomId || lastMsg.rid || '';
-  const mid = lastMsg.mid || '';
-  const senderName = lastMsg.name || '';
-
-  // [返信 aid=AID to=RID-MID]名前さん 形式
-  const replyTag = `[返信 aid=${aid} to=${rid}-${mid}]${senderName}さん`;
-  const replyText = `${replyTag}\n${text}`;
-
-  // チャット入力欄にテキスト設定
-  chatInput.value = replyText;
-  chatInput.focus();
-
-  // inputイベントをdispatchして送信ボタンを有効化
-  chatInput.dispatchEvent(new Event('input', { bubbles: true }));
-
-  log.info('返信テキストを入力欄に挿入', { replyTag });
 }
 
 /**

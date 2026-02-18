@@ -164,48 +164,6 @@
   white-space: pre-wrap;
 }
 
-.cw-thread-panel__footer {
-  background: #fafafa;
-  border-top: 1px solid #ddd;
-  padding: 8px;
-  display: flex;
-  gap: 6px;
-  align-items: flex-end;
-  flex-shrink: 0;
-}
-
-.cw-thread-reply-input {
-  flex: 1;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 6px 8px;
-  font-size: 13px;
-  resize: none;
-  outline: none;
-  font-family: inherit;
-  transition: border-color 0.15s;
-}
-
-.cw-thread-reply-input:focus {
-  border-color: #5fb878;
-}
-
-.cw-thread-reply-send {
-  background: #5fb878;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 6px 12px;
-  font-size: 13px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background-color 0.15s;
-}
-
-.cw-thread-reply-send:hover {
-  background: #4a9361;
-}
-
 .cw-thread-loading {
   text-align: center;
   padding: 20px;
