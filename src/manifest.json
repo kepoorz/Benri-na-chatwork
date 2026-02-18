@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Benri-na-chatwork",
   "version": "2.0.0",
-  "description": "ChatWorkの便利な機能拡張 - フィルタータイルでチャットを整理",
+  "description": "ChatWorkの右カラムにスレッドビューを追加する拡張機能",
   "author": "",
   "permissions": ["storage", "activeTab", "scripting"],
   "host_permissions": ["https://www.chatwork.com/*", "https://kcw.kddi.ne.jp/*"],
