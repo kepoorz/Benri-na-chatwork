@@ -5,13 +5,9 @@
   "private": true,
   "scripts": {
     "prebuild": "npm run lint && npm run format && rimraf dist/data",
-    "build": "npm run prebuild && webpack --config webpack.config.js",
-    "build:prod": "npm run prebuild && webpack --config webpack.config.js --mode=production",
-    "dev": "webpack --mode=development --config webpack.config.js",
-    "zip": "npm run build:prod && bestzip dist/benri-na-chatwork.zip dist/data/*",
+    "build": "npm run prebuild && webpack && bestzip dist/benri-na-chatwork.zip dist/data/*",
     "lint": "eslint src/**/*.js",
-    "format": "prettier --write \"src/**/*.{js,css,html,json}\"",
-    "build:complete": "npm run lint && npm run format && npm run build:prod && npm run zip"
+    "format": "prettier --write \"src/**/*.{js,css,html,json}\""
   },
   "keywords": [
     "chrome-extension",

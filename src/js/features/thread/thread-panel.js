@@ -120,11 +120,22 @@ export function showThreadPanel(chain, anchorMid) {
 function renderMessageItem(msg, isAnchor) {
   const item = document.createElement('div');
   item.className = THREAD_CSS.messageItem;
+  item.dataset.mid = msg.mid;
   if (isAnchor) {
     item.classList.add(THREAD_CSS.messageHighlight);
   }
 
-  // ヘッダー行（アバター + 名前 + 時刻）
+  // ジャンプボタン（右上）- メインタイムラインのメッセージへスクロール
+  const jumpBtn = document.createElement('button');
+  jumpBtn.className = THREAD_CSS.messageJump;
+  jumpBtn.title = 'メッセージへ移動';
+  jumpBtn.textContent = '\u2192\u3053\u3053\u306B\u79FB\u52D5';
+  jumpBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    jumpToMessage(msg.mid);
+  });
+
+  // ヘッダー行（アバター + 名前 + 時刻 + ジャンプボタン）
   const headerRow = document.createElement('div');
   headerRow.style.cssText = 'display:flex;align-items:center;gap:6px;margin-bottom:4px;';
 
@@ -146,6 +157,8 @@ function renderMessageItem(msg, isAnchor) {
   timeSpan.textContent = msg.time;
   headerRow.appendChild(timeSpan);
 
+  headerRow.appendChild(jumpBtn);
+
   item.appendChild(headerRow);
 
   // メッセージ本文
@@ -153,7 +166,6 @@ function renderMessageItem(msg, isAnchor) {
   textDiv.className = THREAD_CSS.messageText;
 
   if (msg.domElement && !msg.fromApi) {
-    // DOMからクローン
     const bodyEl = msg.domElement.querySelector(
       'pre, [class*="timelineMessage__text"], ._messageText, .chatTimeLineMessage__message, [data-testid="message-text"]'
     );
@@ -164,30 +176,58 @@ function renderMessageItem(msg, isAnchor) {
       textDiv.textContent = msg.bodyText || '';
     }
   } else {
-    // APIから取得またはフォールバック
     textDiv.innerHTML = msg.body || msg.bodyText || '';
   }
 
   item.appendChild(textDiv);
 
-  // ホバー時アクションバー（返信ボタン）
+  // ホバー時アクションバー（Chatworkネイティブ風）
   const actionBar = document.createElement('div');
   actionBar.className = THREAD_CSS.messageActions;
 
-  const replyBtn = document.createElement('button');
-  replyBtn.className = THREAD_CSS.messageActionBtn;
-  replyBtn.innerHTML =
-    '<svg viewBox="0 0 10 10" width="14" height="14"><use fill-rule="evenodd" href="#icon_reply"></use></svg>' +
-    '<span>返信</span>';
-  replyBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    injectReplyTag(msg);
+  const actions = [
+    { icon: '#icon_reply', label: '返信', handler: () => injectReplyTag(msg) },
+    { icon: '#icon_quote', label: '引用', handler: () => injectQuoteTag(msg) },
+  ];
+
+  actions.forEach(({ icon, label, handler }) => {
+    const btn = document.createElement('button');
+    btn.className = THREAD_CSS.messageActionBtn;
+    btn.innerHTML =
+      `<svg viewBox="0 0 10 10" width="14" height="14"><use fill-rule="evenodd" href="${icon}"></use></svg>` +
+      `<span class="${THREAD_CSS.messageActionLabel}">${label}</span>`;
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      handler();
+    });
+    actionBar.appendChild(btn);
   });
 
-  actionBar.appendChild(replyBtn);
   item.appendChild(actionBar);
 
   return item;
+}
+
+/**
+ * メインタイムラインの該当メッセージへスクロール
+ */
+function jumpToMessage(mid) {
+  // Chatworkのメッセージ要素を探す
+  const target =
+    document.querySelector(`#_messageId${mid}`) ||
+    document.querySelector(`[data-mid="${mid}"]._message`);
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // 一時的にハイライト
+    target.style.transition = 'background-color 0.3s';
+    target.style.backgroundColor = 'rgba(95, 184, 120, 0.2)';
+    setTimeout(() => {
+      target.style.backgroundColor = '';
+    }, 2000);
+    log.info('メッセージへ移動', { mid });
+  } else {
+    log.warn('メッセージが見つかりません（タイムライン外）', { mid });
+  }
 }
 
 /**
@@ -247,7 +287,31 @@ function sendReplyFromPanel(text) {
   // inputイベントをdispatchして送信ボタンを有効化
   chatInput.dispatchEvent(new Event('input', { bubbles: true }));
 
-  log.info('返信テキストを入力欄に挿入', { rpTag });
+  log.info('返信テキストを入力欄に挿入', { replyTag });
+}
+
+/**
+ * 引用タグをチャット入力欄に挿入
+ */
+function injectQuoteTag(msg) {
+  const chatInput = findElementBySelectors(THREAD_SELECTORS.chatInput);
+  if (!chatInput) {
+    log.warn('チャット入力欄が見つかりません');
+    return;
+  }
+
+  const aid = msg.aid || '';
+  const time = msg.time || '';
+  const bodyText = msg.bodyText || '';
+
+  // [qt][qtmeta aid=AID time=TIME]本文[/qt] 形式
+  const quoteTag = `[qt][qtmeta aid=${aid} time=${time}]${bodyText}[/qt]`;
+  const current = chatInput.value;
+  chatInput.value = current ? `${current}\n${quoteTag}\n` : `${quoteTag}\n`;
+  chatInput.focus();
+  chatInput.dispatchEvent(new Event('input', { bubbles: true }));
+
+  log.info('引用タグを挿入', { aid });
 }
 
 /**

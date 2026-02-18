@@ -290,27 +290,35 @@
 .cw-thread-message {
   padding: 8px;
   border-bottom: 1px solid #eee;
-  position: relative;
 }
 
 .cw-thread-message:last-child {
   border-bottom: none;
 }
 
-.cw-thread-message__actions {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  display: none;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  padding: 2px;
+/* ジャンプボタン（ヘッダー行右端） */
+.cw-thread-message__jump {
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 0;
+  color: #999;
+  font-size: 11px;
+  white-space: nowrap;
+  transition: color 0.15s;
 }
 
-.cw-thread-message:hover .cw-thread-message__actions {
+.cw-thread-message__jump:hover {
+  color: #5fb878;
+}
+
+/* アクションバー（常時表示、メッセージ下部） */
+.cw-thread-message__actions {
   display: flex;
+  padding: 2px;
+  margin-top: 4px;
+  gap: 2px;
 }
 
 .cw-thread-message__action-btn {
@@ -336,6 +344,10 @@
   fill: currentColor;
 }
 
+.cw-thread-message__action-label {
+  font-size: 11px;
+}
+
 .cw-thread-message--highlight {
   background: #e8f5e9;
   border-left: 3px solid #5fb878;
@@ -357,7 +369,6 @@
 .cw-thread-message__time {
   font-size: 11px;
   color: #999;
-  margin-left: auto;
 }
 
 .cw-thread-message__text {
