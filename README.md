@@ -25,6 +25,15 @@ ChatWorkの右カラム（サイドバー）にスレッドビューを追加す
 
 ## インストール
 
+### リリース版（簡単）
+
+1. [Releases](https://github.com/kepoorz/Benri-na-chatwork/releases) から最新の `benri-na-chatwork.zip` をダウンロード
+2. zipを解凍
+3. `chrome://extensions` → デベロッパーモードON
+4. 「パッケージ化されていない拡張機能を読み込む」→ 解凍したフォルダを選択
+
+### ソースからビルド
+
 1. クローン & ビルド:
    ```
    git clone https://github.com/kepoorz/Benri-na-chatwork.git
@@ -33,9 +42,7 @@ ChatWorkの右カラム（サイドバー）にスレッドビューを追加す
    npm run build
    ```
 
-2. Chromeにインストール:
-   - `chrome://extensions` → デベロッパーモードON
-   - 「パッケージ化されていない拡張機能を読み込む」→ `dist/data` を選択
+2. `chrome://extensions` → デベロッパーモードON → `dist/data` を読み込む
 
 ## 開発
 
