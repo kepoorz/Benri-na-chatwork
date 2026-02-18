@@ -36,10 +36,7 @@ function setupMessageListeners() {
 }
 
 export function initOnChatworkPage() {
-  if (
-    window.location.hostname.includes('chatwork.com') ||
-    window.location.hostname.includes('kcw.kddi.ne.jp')
-  ) {
+  if (window.location.hostname.includes('chatwork.com')) {
     log.info('ChatWorkページ検出。初期化開始...');
     waitForDomReady({ callback: initialize, retryInterval: 500, maxRetries: 10 });
   }

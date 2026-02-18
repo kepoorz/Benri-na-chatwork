@@ -19,7 +19,6 @@ ChatWorkの右カラム（サイドバー）にスレッドビューを追加す
 ## 対応サイト
 
 - https://www.chatwork.com
-- https://kcw.kddi.ne.jp (KDDI Chatwork)
 
 ## インストール
 

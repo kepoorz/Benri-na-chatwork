@@ -5,7 +5,7 @@
   "description": "ChatWorkの右カラムにスレッドビューを追加する拡張機能",
   "author": "",
   "permissions": ["storage", "activeTab", "scripting"],
-  "host_permissions": ["https://www.chatwork.com/*", "https://kcw.kddi.ne.jp/*"],
+  "host_permissions": ["https://www.chatwork.com/*"],
   "action": {
     "default_popup": "html/popup.html",
     "default_icon": {
@@ -22,7 +22,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://www.chatwork.com/*", "https://kcw.kddi.ne.jp/*"],
+      "matches": ["https://www.chatwork.com/*"],
       "js": ["js/content-bundle.js"],
       "css": ["css/styles.css"]
     }
@@ -30,7 +30,7 @@
   "web_accessible_resources": [
     {
       "resources": ["images/*"],
-      "matches": ["https://www.chatwork.com/*", "https://kcw.kddi.ne.jp/*"]
+      "matches": ["https://www.chatwork.com/*"]
     }
   ]
 }

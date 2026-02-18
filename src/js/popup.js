@@ -22,10 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function sendMessageToContentScript(message) {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    if (
-      tabs[0] &&
-      (tabs[0].url.includes('chatwork.com') || tabs[0].url.includes('kcw.kddi.ne.jp'))
-    ) {
+    if (tabs[0] && tabs[0].url.includes('chatwork.com')) {
       chrome.tabs.sendMessage(tabs[0].id, message);
     }
   });
