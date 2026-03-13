@@ -25,12 +25,9 @@ ChatWorkの右カラム（サイドバー）にスレッドビューを追加す
 
 ## インストール
 
-### リリース版（簡単）
+### Chrome Web Store（推奨）
 
-1. [Releases](https://github.com/ide/chatwork-threader/releases) から最新の `chatwork-threader.zip` をダウンロード
-2. zipを解凍
-3. `chrome://extensions` → デベロッパーモードON
-4. 「パッケージ化されていない拡張機能を読み込む」→ 解凍したフォルダを選択
+[Chrome Web Store からインストール](https://chromewebstore.google.com/detail/chatwork-threader/icmnefbigfpmifnifjbipjkjogpmlpcn)
 
 ### ソースからビルド
 
